@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Список сайтов</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .site-card {
+      display: flex;
+      flex-direction: column; /* Изменяем направление для мобильных */
+      align-items: flex-start; /* Выравниваем по левому краю */
+      padding: 15px;
+      border: 1px solid #ddd;
+      margin-bottom: 10px;
+      width: 90%; /* Задаем ширину 90% для мобильных устройств */
+      max-width: 600px;
+    }
+
+    .logo {
+      width: 100%; /* Задаем ширину 100% для мобильных устройств */
+      max-width: 200px; /* Ограничиваем максимальную ширину */
+      height: auto;
+      margin-right: 15px;
+      margin-bottom: 10px; /* Добавляем отступ снизу */
+      object-fit: cover;
+    }
+
+    .site-info {
+      display: flex;
+      flex-direction: column; /* Изменяем направление для мобильных */
+      justify-content: space-between;
+    }
+
+    .site-name {
+      font-weight: bold;
+    }
+
+    .rating {
+      display: flex;
+      align-items: center;
+    }
+
+    .star {
+      color: gold;
+      font-size: 16px;
+      margin-right: 3px;
+    }
+
+    .description {
+      margin-top: 5px;
+    }
+
+    .button {
+      padding: 8px 15px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-left: auto; /* Добавляем отступ слева для кнопок */
+      width: fit-content; /* Автоматически подстраиваем ширину */
+    }
+
+    /* Стили для цифр */
+    .site-number {
+      font-size: 24px;
+      margin-right: 10px;
+    }
+
+    /* Адаптивные стили для мобильных устройств */
+    @media (max-width: 600px) {
+      .site-card {
+        flex-direction: column;
+      }
+
+      .logo {
+        width: 100%;
+        height: auto;
+        margin-bottom: 10px;
+      }
+
+      .site-info {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  {% for site in sites %}
+    <div class="site-card">
+      <span class="site-number">{{ site.number }}</span>
+      <img class="logo" src="{{ site.logo_url }}" alt="Логотип сайта">
+      <div class="site-info">
+        <div class="site-name">{{ site.name }}</div>
+        <div class="rating">
+            <span class="star">{{site.rating}}</span>
+          <span> Отзывы: {{ site.reviews }}</span>
+        </div>
+        <div class="description">{{ site.description }}</div>
+      </div>
+      <a href="{{ site.url }}" class="button">Перейти на сайт</a>
+    </div>
+  {% endfor %}
+
+</body>
+</html>
